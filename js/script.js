@@ -24,20 +24,20 @@ $(document).ready(() => {
     
     // Create a variable to hold the first promise
     movieSearchApp.getMovies = $.ajax({
-        url: ''
+        url: `http://www.omdbapi.com/?i=tt3896198&apikey=e4c618b1&s=${searchText}`,
         dataType: 'json',
         method: 'GET'
     });
     // Create a variable to hold the second promise
     movieSearchApp.getPoster = $.ajax({
-        url: ''
+        url: '',
         dataType: 'json',
         method: 'GET'
     });
 
     // Create a variable to hold third promise
     movieSearchApp.moreInfo = $.ajax({
-        url: ''
+        url: '',
         dataType: 'json',
         method: 'GET'
     });
@@ -48,11 +48,11 @@ $(document).ready(() => {
     // Use the results of those promises
     .then((resultOne, resultTwo, resultThree) => {
         // And show them to us
-        console.log(resultOne, resultTwo, resultThree);
+        // console.log(resultOne, resultTwo, resultThree);
     })
     // If we don't get anything back, show us an error
     .fail((err1, err2, err3) => {
-        console.log(err1, err2, err3);
+        // console.log(err1, err2, err3);
     })
     
 
