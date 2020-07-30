@@ -22,12 +22,40 @@ $(document).ready(() => {
         });
     };
     
-    // Make AJAX request using by using user input + search parameters
-    movieSearchApp.getInfo = function (searchText) {
-        console.log(searchText);
-     };
-    // Make second AJAX request when clicking "more info" by ID or Title parameters
-    movieSearchApp.moreInfo = function () { };
+    // Create a variable to hold the first promise
+    movieSearchApp.getMovies = $.ajax({
+        url: `http://www.omdbapi.com/?i=tt3896198&apikey=e4c618b1&s=${searchText}`,
+        dataType: 'json',
+        method: 'GET'
+    });
+    // Create a variable to hold the second promise
+    movieSearchApp.getPoster = $.ajax({
+        url: '',
+        dataType: 'json',
+        method: 'GET'
+    });
+
+    // Create a variable to hold third promise
+    movieSearchApp.moreInfo = $.ajax({
+        url: '',
+        dataType: 'json',
+        method: 'GET'
+    });
+
+    // Listen to fulfillment or rejection of multiple promises:
+    // When we get ALL three promises
+    $.when(movieSearchApp.getMovies, movieSearchApp.getPoster, movieSearchApp.moreInfo)
+    // Use the results of those promises
+    .then((resultOne, resultTwo, resultThree) => {
+        // And show them to us
+        // console.log(resultOne, resultTwo, resultThree);
+    })
+    // If we don't get anything back, show us an error
+    .fail((err1, err2, err3) => {
+        // console.log(err1, err2, err3);
+    })
+    
+
     // Display data on the page
     movieSearchApp.displayInfo = function () { };
 
