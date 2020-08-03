@@ -1,4 +1,5 @@
 .wrapper {
+<<<<<<< HEAD
   max-width: 1200px;
   width: 85%;
   margin: 0 auto;  
@@ -32,3 +33,41 @@ p {
     letter-spacing: 1px;
     text-transform: uppercase;
 }
+=======
+    max-width: 1200px;
+    width: 85%;
+    margin: 0 auto;  
+  }
+  
+  header {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+  }
+  
+  h1 {
+      font-family: 'Barlow', sans-serif;
+      font-size: 138px;
+      line-height: 126px;
+  }
+  
+  h3, a, label {
+      font-family: 'Barlow', sans-serif;
+      font-size: 20px;
+      text-transform: uppercase;
+  }
+  
+  a:link, a:visited {
+      text-decoration: none;
+    }
+  
+  p {
+      font-family: 'Barlow', sans-serif;
+      font-size: 32px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+  }
+  
+  
+  
+>>>>>>> 26b704f88a561589a8f1bcf4bdb9860a27731754
