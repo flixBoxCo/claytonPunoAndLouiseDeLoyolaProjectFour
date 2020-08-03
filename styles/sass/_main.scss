@@ -6,6 +6,8 @@ main {
 form {
     display: flex;
     justify-content: center;
+<<<<<<< HEAD
+=======
     flex-direction: column;
     text-align: center;
 
@@ -14,6 +16,7 @@ form {
         justify-content: center;
         margin-top: 10px;
     }
+>>>>>>> 26b704f88a561589a8f1bcf4bdb9860a27731754
 }
 
 input[type=text] {
@@ -42,4 +45,8 @@ section {
     img {
         width: 100%;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 26b704f88a561589a8f1bcf4bdb9860a27731754
