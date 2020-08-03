@@ -235,6 +235,10 @@ html {
   overflow: hidden;
 }
 
+input {
+  display: block;
+}
+
 input:invalid {
   -webkit-box-shadow: none;
           box-shadow: none;
