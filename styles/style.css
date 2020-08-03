@@ -234,3 +234,12 @@ html {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+
+input {
+  display: block;
+}
+
+input:invalid {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}

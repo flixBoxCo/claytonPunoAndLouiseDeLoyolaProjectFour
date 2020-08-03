@@ -1,0 +1,9 @@
+
+input {
+    display: block;
+}
+
+// Hides red border
+input:invalid {
+    box-shadow: none;
+}

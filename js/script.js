@@ -1,67 +1,69 @@
-$(document).ready(() => {
-    //Doc Ready
-    $(function () {
-        console.log('doc is ready');
-        movieSearchApp.init();
-    });
-    // Create app namespace to hold all methods
-    const movieSearchApp = {};
 
-    // Start app
-    movieSearchApp.init = function () {
-        movieSearchApp.collectInfo();
-     };
+// Create app namespace to hold all methods
+const flixBoxApp = {};
 
-    // Collect user input using a form to fill in search text 
-    
-    movieSearchApp.collectInfo = function () {
-        $("form").on('submit', (e) => {
-            e.preventDefault();
-            let searchText = $('#search').val();
-            movieSearchApp.getInfo(searchText);
-        });
-    };
-    
-    // Create a variable to hold the first promise
-    movieSearchApp.getMovies = $.ajax({
-        url: `http://www.omdbapi.com/?i=tt3896198&apikey=e4c618b1&s=${searchText}`,
-        dataType: 'json',
-        method: 'GET'
-    });
-    // Create a variable to hold the second promise
-    movieSearchApp.getPoster = $.ajax({
-        url: '',
-        dataType: 'json',
-        method: 'GET'
-    });
+flixBoxApp.apikey = 'e4c618b1';
 
-    // Create a variable to hold third promise
-    movieSearchApp.moreInfo = $.ajax({
-        url: '',
-        dataType: 'json',
-        method: 'GET'
-    });
+// When the page loads focus on the input field
+$('input').focus();
 
-    // Listen to fulfillment or rejection of multiple promises:
-    // When we get ALL three promises
-    $.when(movieSearchApp.getMovies, movieSearchApp.getPoster, movieSearchApp.moreInfo)
-    // Use the results of those promises
-    .then((resultOne, resultTwo, resultThree) => {
-        // And show them to us
-        // console.log(resultOne, resultTwo, resultThree);
+// Collect user input using a form to fill in search text
+flixBoxApp.collectInfo = function() {
+    $("form").on('submit', (e) => {
+        e.preventDefault();
+        let searchText = $('input').val();
+        flixBoxApp.getMovieName(searchText);
     })
-    // If we don't get anything back, show us an error
-    .fail((err1, err2, err3) => {
-        // console.log(err1, err2, err3);
+}
+
+// AJAX call to get movie name and imdbID
+
+flixBoxApp.getMovieName = function (search) {
+        $.ajax({
+        url: `http://www.omdbapi.com/?`,
+        method: 'GET',
+        dataType: 'json',
+        data: {
+            apikey: flixBoxApp.apikey,
+            s: `${search}`
+        }
+    }).then((result) => {
+        
+        console.log(result);
+        const Search = result.Search;
+        flixBoxApp.displayMovie(Search);
     })
+}
+
+// Append the movies on DOM 
+flixBoxApp.displayMovie = function(data){
     
+    // look through each object in the array
+    // get the title, poster and imdbID
+    // display these on the page in html elements
+    // forEach 
+    data.forEach(function(movies) {
+        const movieAll = 
+    `
+    <div class="movieAll">
+        <img src="${movies.Poster}">
+        <h3>${movies.Title}</h3>
+        <a onclick="selectedMovie"('${movies.imdbID}')" href="#">Movie Details</a>
+    </div>
+    `
+    $('.section').append(movieAll);
+    console.log(movies);
 
-    // Display data on the page
-    movieSearchApp.displayInfo = function () { };
+    })
+}
 
 
+flixBoxApp.init = function() {
+    flixBoxApp.collectInfo();
+}
 
-});
-
-
+//Document ready
+$(function () {
+    flixBoxApp.init();
+})
 
