@@ -16,22 +16,44 @@ flixBoxApp.collectInfo = function() {
     })
 }
 
+// AJAX call to get movie name and imdbID
 
-// AJAX call
-flixBoxApp.getMovieName = function (searchText) {
-    $.ajax({
-        url: `http://www.omdbapi.com/?s=${searchText}`,
+flixBoxApp.getMovieName = function (search) {
+        $.ajax({
+        url: `http://www.omdbapi.com/?`,
         method: 'GET',
         dataType: 'json',
         data: {
             apikey: flixBoxApp.apikey,
+            s: `${search}`
         }
-        })
-        .then(function (result) {
-            // const movieTitle = result.movieTitle;
-            // flixBoxApp.displayMovie(movieTitle)
-            console.log(result);
-        })
+    }).then((result) => {
+        console.log(result);
+        const Search = result.Search;
+        flixBoxApp.displayMovie(Search);
+    })
+}
+
+// Append the movies on DOM 
+flixBoxApp.displayMovie = function(data){
+    
+    // look through each object in the array
+    // get the title, poster and imdbID
+    // display these on the page in html elements
+    // forEach 
+    data.forEach(function(movies) {
+        const movieAll = 
+    `
+    <div class="movieAll">
+        <img src="${movies.Poster}">
+        <h3>${movies.Title}</h3>
+        <a onclick="selectedMovie"('${movies.imdbID}')" href="#">Movie Details</a>
+    </div>
+    `
+    $('.section').append(movieAll);
+    console.log(movies);
+
+    })
 }
 
 
@@ -43,3 +65,4 @@ flixBoxApp.init = function() {
 $(function () {
     flixBoxApp.init();
 })
+
