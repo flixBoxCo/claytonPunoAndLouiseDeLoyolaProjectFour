@@ -280,6 +280,42 @@ h1 {
   line-height: 126px;
 }
 
+h3, a {
+  font-family: 'Barlow', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+a:link, a:visited {
+  text-decoration: none;
+}
+
+p {
+  font-family: 'Barlow', sans-serif;
+  font-size: 32px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  max-width: 1200px;
+  width: 85%;
+  margin: 0 auto;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Barlow', sans-serif;
+  font-size: 138px;
+  line-height: 126px;
+}
+
 h3, a, label {
   font-family: 'Barlow', sans-serif;
   font-size: 20px;
@@ -333,6 +369,11 @@ form .searchBar {
 input[type=text] {
   width: 500px;
   padding: 10px;
+}
+
+input:invalid {
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 button[type=submit] {
