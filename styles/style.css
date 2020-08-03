@@ -235,6 +235,45 @@ html {
   overflow: hidden;
 }
 
+.wrapper {
+  max-width: 1200px;
+  width: 85%;
+  margin: 0 auto;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Barlow', sans-serif;
+  font-size: 138px;
+  line-height: 126px;
+}
+
+h3, a {
+  font-family: 'Barlow', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+a:link, a:visited {
+  text-decoration: none;
+}
+
+p {
+  font-family: 'Barlow', sans-serif;
+  font-size: 32px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 input {
   display: block;
 }
@@ -242,4 +281,58 @@ input {
 input:invalid {
   -webkit-box-shadow: none;
           box-shadow: none;
+}
+
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+input[type=text] {
+  width: 500px;
+  padding: 10px;
+}
+
+button[type=submit] {
+  font-family: 'Barlow', sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.movieAll {
+  width: 33%;
+  margin: 50px 0;
+}
+
+.movieAll img {
+  width: 100%;
 }

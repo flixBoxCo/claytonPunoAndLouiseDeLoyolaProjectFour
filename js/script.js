@@ -32,6 +32,8 @@ flixBoxApp.getMovieName = function (search) {
         console.log(result);
         const Search = result.Search;
         flixBoxApp.displayMovie(Search);
+    }).catch(error => {
+        alert("Could not find move. Please try again")
     })
 }
 
