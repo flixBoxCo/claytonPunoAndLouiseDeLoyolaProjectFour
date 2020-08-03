@@ -235,6 +235,29 @@ html {
   overflow: hidden;
 }
 
+h1 {
+  font-family: 'Barlow', sans-serif;
+  font-size: 138px;
+  line-height: 126px;
+}
+
+h3, a, label {
+  font-family: 'Barlow', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+a:link, a:visited {
+  text-decoration: none;
+}
+
+p {
+  font-family: 'Barlow', sans-serif;
+  font-size: 32px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 .wrapper {
   max-width: 1200px;
   width: 85%;
@@ -257,7 +280,7 @@ h1 {
   line-height: 126px;
 }
 
-h3, a {
+h3, a, label {
   font-family: 'Barlow', sans-serif;
   font-size: 20px;
   text-transform: uppercase;
@@ -272,15 +295,6 @@ p {
   font-size: 32px;
   letter-spacing: 1px;
   text-transform: uppercase;
-}
-
-input {
-  display: block;
-}
-
-input:invalid {
-  -webkit-box-shadow: none;
-          box-shadow: none;
 }
 
 main {
@@ -299,6 +313,21 @@ form {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+}
+
+form .searchBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 10px;
 }
 
 input[type=text] {
