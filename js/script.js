@@ -17,7 +17,6 @@ flixBoxApp.collectInfo = function() {
 }
 
 // AJAX call to get movie name and imdbID
-
 flixBoxApp.getMovieName = function (search) {
         $.ajax({
         url: `http://www.omdbapi.com/?`,
@@ -27,8 +26,17 @@ flixBoxApp.getMovieName = function (search) {
             apikey: flixBoxApp.apikey,
             s: `${search}`
         }
-    }).then((result) => {
-        
+    })
+    //create an array to hold our Pokemon promise objects in order
+    // const movieResults = [];
+    // //use for loop to call function 30 times to get 30 pokemon
+    // for (let i = 1; i <= 10; i++) {
+    //     movieResults.push(getMovieName(i));
+    // }
+    // //check whether promises have ALL resolved
+    // $.when(...movieResults)
+    // //THEN we can check whether they've resolved successfully
+    .then((result) => {
         console.log(result);
         const Search = result.Search;
         flixBoxApp.displayMovie(Search);
@@ -36,6 +44,8 @@ flixBoxApp.getMovieName = function (search) {
         alert("Could not find move. Please try again")
     })
 }
+
+
 
 // Append the movies on DOM 
 flixBoxApp.displayMovie = function(data){
