@@ -28,6 +28,7 @@ flixBoxApp.getMovieName = function (search) {
             s: `${search}`
         }
     }).then((result) => {
+        
         console.log(result);
         const Search = result.Search;
         flixBoxApp.displayMovie(Search);
