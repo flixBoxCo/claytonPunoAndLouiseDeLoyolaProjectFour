@@ -90,14 +90,64 @@ flixBoxApp.displayMovie = function(data){
 
     $('.section').append(movieAll);
     $(".resetButton").show();
-    console.log(movies);
+    // console.log(movies);
     })
 }
 
 function selectedMovie (id) {
-    sessionStorage.setItem('movieID', id);
+    sessionStorage.setItem('movieId', id);
     window.location = 'movie.html';
     return false;
+}
+
+// function for movie.html
+// get imdbID for movie and display on DOM
+flixBoxApp.getMovie = function(){
+    //use session storage to get movie id
+    let movieId = sessionStorage.getItem('movieId');
+    $.ajax({
+        url: `https://www.omdbapi.com/?`,
+        method: 'GET',
+        dataType: 'json',
+        data: {
+            apikey: flixBoxApp.apikey,
+            i: `${movieId}`
+        }
+    }).then((response) => {
+        // console.log(response);
+        let movie = response;
+        // display movie on DOM
+        let output =`
+        <div class="movie">
+            <div class="movieImg">
+                <img src="${movie.Poster}">
+            </div>
+            <div class="movieDetails">
+                <h3>${movie.Title}</h3>
+                <ul>
+                    <li>Genre: ${movie.Genre}</li>
+                    <li>Released: ${movie.Released}</li>
+                    <li>Rated: ${movie.Rated}</li>
+                    <li>IMDB Rating: ${movie.imdbRating}</li>
+                    <li>Director: ${movie.Director}</li>
+                    <li>Writer: ${movie.Writer}</li>
+                    <li>Actors: ${movie.Actors}</li>
+                </ul>
+            </div>
+            <div class="moviePlot">
+                <div class="plotContainer">
+                    <h3>Plot</h3>
+                    ${movie.Plot}
+                    <a href="http://imdb.com/title/${movie.imdbID}" target="_blank">IMDB</a>
+                    <a href="index.html">Go Back to Search</a>
+                </div>
+            </div>
+        </div>
+        `
+        $('section').append(output);
+    }).catch(error => {
+        console.log("There is an error for imdbID");
+    })
 }
 
 //slow scroll 
