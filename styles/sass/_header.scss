@@ -8,18 +8,24 @@ header {
     display: flex;
     justify-content: center;
     text-align: center;
+    background-color: $primaryBackgroundColor;
 }
 
 h1 {
     font-family: 'Barlow', sans-serif;
     font-size: 138px;
     line-height: 126px;
+    color: $primaryColor;
 }
 
 h3, a {
     font-family: 'Barlow', sans-serif;
     font-size: 20px;
     text-transform: uppercase;
+}
+
+h3 {
+    color: $primaryColor;
 }
 
 a:link, a:visited {
