@@ -26,6 +26,17 @@ flixBoxApp.eventListener = function () {
         }
     });
 
+    // Clears search results when user hits backspace
+    let input = $('input');
+    input.on('keydown', function () {
+        var key = event.keyCode || event.charCode;
+
+        if (key == 8 || key == 46) {
+            location.reload();
+            $('form').scrollTop(0);
+        }
+    });
+
     // Refreshes page and search field and scrolls back to top
     $('.resetButton').on('click', function () {
         $('form').trigger("reset");
@@ -37,10 +48,10 @@ flixBoxApp.eventListener = function () {
 }
 
 
-// AJAX call to get movie name
+// AJAX call to get movie name and imdbID
 flixBoxApp.getMovieName = function (search) {
         $.ajax({
-        url: `http://www.omdbapi.com/?`,
+        url: 'https://www.omdbapi.com/?',
         method: 'GET',
         dataType: 'json',
         data: {
@@ -57,7 +68,6 @@ flixBoxApp.getMovieName = function (search) {
     })
 }
 
-
 // Append the movies on DOM 
 flixBoxApp.displayMovie = function(data){
     
@@ -69,11 +79,11 @@ flixBoxApp.displayMovie = function(data){
         const movieAll = 
     `
     <div class="movieAll">
-    <a onclick="selectedMovie" href= "#">
+    <a onclick="selectedMovie('${movies.imdbID}')" href= "#">
         <img src="${movies.Poster}">
         <h3>${movies.Title}</h3>
         <h3>${movies.Year}</h3>
-        <button class="openButton"('${movies.imdbID}'>Movie Details</button>
+        <button class="selectedMovie('${movies.imdbID}')">Movie Details</button>
     </a>
     </div>
     `
@@ -84,6 +94,11 @@ flixBoxApp.displayMovie = function(data){
     })
 }
 
+function selectedMovie (id) {
+    sessionStorage.setItem('movieID', id);
+    window.location = 'movie.html';
+    return false;
+}
 
 //slow scroll 
 flixBoxApp.scroll = function (element) {
