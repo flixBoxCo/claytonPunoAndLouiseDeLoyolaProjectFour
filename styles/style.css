@@ -272,6 +272,48 @@ header {
       -ms-flex-pack: center;
           justify-content: center;
   text-align: center;
+  background-color: #005059;
+}
+
+h1 {
+  font-family: 'Barlow', sans-serif;
+  font-size: 138px;
+  line-height: 126px;
+  color: #FFFFFF;
+}
+
+h3, a {
+  font-family: 'Barlow', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+h3 {
+  color: #FFFFFF;
+}
+
+a:link, a:visited {
+  text-decoration: none;
+}
+
+p {
+  font-family: 'Barlow', sans-serif;
+  font-size: 32px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  max-width: 1200px;
+  width: 85%;
+  margin: 0 auto;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
 }
 
 h1 {
@@ -304,6 +346,8 @@ main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  background-color: #C8E8EA;
+  padding-bottom: 150px;
 }
 
 form {
@@ -335,7 +379,17 @@ input[type=text] {
   padding: 10px;
 }
 
-button[type=submit] {
+input:invalid {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+label {
+  padding: 20px;
+}
+
+button[type=submit],
+.resetButton {
   font-family: 'Barlow', sans-serif;
   font-size: 20px;
   letter-spacing: 1px;
@@ -359,9 +413,57 @@ section {
 
 .movieAll {
   width: 33%;
-  margin: 50px 0;
+  margin: 40px 0;
+  padding: 30px;
+  background-color: #005059;
+  -webkit-transition: -webkit-transform .2s;
+  transition: -webkit-transform .2s;
+  transition: transform .2s;
+  transition: transform .2s, -webkit-transform .2s;
+  cursor: pointer;
 }
 
 .movieAll img {
   width: 100%;
+}
+
+.movieAll:hover {
+  background-color: #C8E8EA;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  opacity: 0.7;
+}
+
+.movieAll:hover h3 {
+  color: #000000;
+}
+
+button {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #FFB6AF;
+}
+
+button:hover {
+  border: 1px solid #FE9A84;
+  background: #FE9A84;
+}
+
+.resetButton {
+  padding: 10px;
+}
+
+.searchAgain {
+  margin-top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+footer {
+  background-color: #005059;
+  padding: 50px;
 }
