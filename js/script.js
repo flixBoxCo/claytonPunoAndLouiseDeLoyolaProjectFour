@@ -1,77 +1,83 @@
-
 // Create app namespace to hold all methods
 const flixBoxApp = {};
-
 flixBoxApp.apikey = 'e4c618b1';
-
 // When the page loads focus on the input field
 $('input').focus();
-
-// Collect user input using a form to fill in search text
-flixBoxApp.collectInfo = function() {
+$(".resetButton").hide();
+//Event listeners
+flixBoxApp.eventListener = function () {
+    // Collect user input using a form to fill in search text
     $("form").on('submit', (e) => {
         e.preventDefault();
         let searchText = $('input').val();
         flixBoxApp.getMovieName(searchText);
+        flixBoxApp.scroll(".section");
     })
+    // Triggers search button when enter key is pressed
+    $(".submit").keyup(function (event) {
+        if (event.keyCode === 13) {
+            $(".submit").click();
+        }
+    });
+    // Clears search results when user hits backspace
+    let input = $('input');
+    input.on('keydown', function () {
+        let key = event.keyCode || event.charCode;
+        if (key == 8 || key == 46) {
+            location.reload();
+            $('form').scrollTop(0);
+        }
+    });
+    // Refreshes page and search field and scrolls back to top
+    $('.resetButton').on('click', function () {
+        $('form').trigger("reset");
+        location.reload();
+        $(".resetButton").hide();
+        $('form').scrollTop(0);
+    });
 }
-
 // AJAX call to get movie name and imdbID
 flixBoxApp.getMovieName = function (search) {
-        $.ajax({
-        url: `http://www.omdbapi.com/?`,
-        method: 'GET',
-        dataType: 'json',
-        data: {
-            apikey: flixBoxApp.apikey,
-            s: `${search}`
+    $.ajax({
+    url: `https://www.omdbapi.com/?`,
+    method: 'GET',
+    dataType: 'json',
+    data: {
+        apikey: flixBoxApp.apikey,
+        s: `${search}`
         }
-    })
-    //create an array to hold our Pokemon promise objects in order
-    // const movieResults = [];
-    // //use for loop to call function 30 times to get 30 pokemon
-    // for (let i = 1; i <= 10; i++) {
-    //     movieResults.push(getMovieName(i));
-    // }
-    // //check whether promises have ALL resolved
-    // $.when(...movieResults)
-    // //THEN we can check whether they've resolved successfully
-    .then((result) => {
-        console.log(result);
-        const Search = result.Search;
-        flixBoxApp.displayMovie(Search);
+    }).then((response) => {
+        // console.log(result);
+        const search = response.Search;
+        flixBoxApp.displayMovie(search);
+        // const id = result.Search.imdbID;
     }).catch(error => {
-        alert("Could not find move. Please try again")
+        alert("Could not find movie. Please try again")
     })
 }
-
-
-
 // Append the movies on DOM 
 flixBoxApp.displayMovie = function(data){
-    
     // look through each object in the array
     // get the title, poster and imdbID
-    // display these on the page in html elements
-    // forEach 
+    // display these on the page in html elements using forEach
     data.forEach(function(movies) {
         const movieAll = 
     `
     <div class="movieAll">
         <img src="${movies.Poster}">
         <h3>${movies.Title}</h3>
-        <a onclick="selectedMovie"('${movies.imdbID}')" href="#">Movie Details</a>
+        <a onclick="flixBoxApp.selectedMovie('${movies.imdbID}')" href="#">Movie Details</a>
     </div>
     `
-    $('.section').append(movieAll);
     $('section').append(movieAll);
     $(".resetButton").show();
     // console.log(movies);
-
+    // console.log(movies.imdbID)
     })
 }
 
-function selectedMovie (id) {
+// function for <a onclick> to save session storage to movie.html
+flixBoxApp.selectedMovie = function(id){
     sessionStorage.setItem('movieId', id);
     window.location = 'movie.html';
     return false;
@@ -135,13 +141,11 @@ flixBoxApp.scroll = function (element) {
         }, 1000
     );
 };
-
-flixBoxApp.init = function() {
-    flixBoxApp.collectInfo();
+flixBoxApp.init = function () {
+    // flixBoxApp.collectInfo();
+    flixBoxApp.eventListener();
 }
-
 //Document ready
 $(function () {
     flixBoxApp.init();
-})
-
+});
