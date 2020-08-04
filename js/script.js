@@ -6,46 +6,67 @@ flixBoxApp.apikey = 'e4c618b1';
 
 // When the page loads focus on the input field
 $('input').focus();
+$(".resetButton").hide();
 
-// Collect user input using a form to fill in search text
-flixBoxApp.collectInfo = function() {
+//Event listeners
+flixBoxApp.eventListener = function () {
+
+    // Collect user input using a form to fill in search text
     $("form").on('submit', (e) => {
         e.preventDefault();
         let searchText = $('input').val();
         flixBoxApp.getMovieName(searchText);
+        flixBoxApp.scroll(".section");
     })
+
+    // Triggers search button when enter key is pressed
+    $(".submit").keyup(function (event) {
+        if (event.keyCode === 13) {
+            $(".submit").click();
+        }
+    });
+
+    // Clears search results when user hits backspace
+    let input = $('input');
+    input.on('keydown', function () {
+        var key = event.keyCode || event.charCode;
+
+        if (key == 8 || key == 46) {
+            location.reload();
+            $('form').scrollTop(0);
+        }
+    });
+
+    // Refreshes page and search field and scrolls back to top
+    $('.resetButton').on('click', function () {
+        $('form').trigger("reset");
+        location.reload();
+        $(".resetButton").hide();
+        $('form').scrollTop(0);
+    });
+
 }
+
 
 // AJAX call to get movie name and imdbID
 flixBoxApp.getMovieName = function (search) {
         $.ajax({
-        url: `http://www.omdbapi.com/?`,
+        url: 'https://www.omdbapi.com/?',
         method: 'GET',
         dataType: 'json',
         data: {
             apikey: flixBoxApp.apikey,
-            s: `${search}`
+            s: `${search}`,
         }
-    })
-    //create an array to hold our Pokemon promise objects in order
-    // const movieResults = [];
-    // //use for loop to call function 30 times to get 30 pokemon
-    // for (let i = 1; i <= 10; i++) {
-    //     movieResults.push(getMovieName(i));
-    // }
-    // //check whether promises have ALL resolved
-    // $.when(...movieResults)
-    // //THEN we can check whether they've resolved successfully
-    .then((result) => {
+    }).then((result) => {
         console.log(result);
         const Search = result.Search;
         flixBoxApp.displayMovie(Search);
     }).catch(error => {
-        alert("Could not find move. Please try again")
+        alert("Could not find movie. Please enter a valid movie name.")
+        console.log(error);
     })
 }
-
-
 
 // Append the movies on DOM 
 flixBoxApp.displayMovie = function(data){
@@ -58,16 +79,18 @@ flixBoxApp.displayMovie = function(data){
         const movieAll = 
     `
     <div class="movieAll">
+    <a onclick="selectedMovie('${movies.imdbID}')" href= "#">
         <img src="${movies.Poster}">
         <h3>${movies.Title}</h3>
-        <a onclick="selectedMovie"('${movies.imdbID}')" href="#">Movie Details</a>
+        <h3>${movies.Year}</h3>
+        <button class="selectedMovie('${movies.imdbID}')">Movie Details</button>
+    </a>
     </div>
     `
+
     $('.section').append(movieAll);
-    $('section').append(movieAll);
     $(".resetButton").show();
     // console.log(movies);
-
     })
 }
 
@@ -136,12 +159,13 @@ flixBoxApp.scroll = function (element) {
     );
 };
 
-flixBoxApp.init = function() {
-    flixBoxApp.collectInfo();
+
+flixBoxApp.init = function () {
+    // flixBoxApp.collectInfo();
+    flixBoxApp.eventListener();
 }
 
 //Document ready
 $(function () {
     flixBoxApp.init();
-})
-
+});
