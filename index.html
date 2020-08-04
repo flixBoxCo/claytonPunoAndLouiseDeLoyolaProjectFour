@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@700&family=Lato&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/46dce38978.js" crossorigin="anonymous"></script>
     <title>flixBox</title>
 </head>
 <body>
@@ -13,7 +12,7 @@
     <header>
         <div class="wrapper">
             <div class="headerContent">
-                <h1>flixBoxCo</h1>
+                <h1>flixBox.</h1>
             </div>
         </div>
     </header>
@@ -26,14 +25,19 @@
             <form>
                 <label for="search">Search and find your favorite movie</label>
                 <div class="searchBar">
-                    <input type="text" id="search" required>
+                    <input type="text" id="search" autocomplete="off" required>
                     <button type="submit" id="">Search Movie</button>
                 </div>
             </form>
-            <div class="" id="movies"></div>
+            <!-- <div class="" id="movies"></div> -->
         
-            <section class="section">
+            <section>
+            </section>
 
+            <section class="searchAgain">
+                <div>
+                    <button class="resetButton" type="reset">Search Again</button>
+                </div>
             </section>
         </div>
     </main>
