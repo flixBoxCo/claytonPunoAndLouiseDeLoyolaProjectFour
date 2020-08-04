@@ -438,6 +438,10 @@ section {
   color: #000000;
 }
 
+a:active {
+  text-decoration: none;
+}
+
 button {
   display: inline-block;
   vertical-align: middle;
