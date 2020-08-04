@@ -4,8 +4,15 @@ flixBoxApp.apikey = 'e4c618b1';
 // When the page loads focus on the input field
 $('input').focus();
 $(".resetButton").hide();
+<<<<<<< HEAD
 //Event listeners
 flixBoxApp.eventListener = function () {
+=======
+
+//Event listeners
+flixBoxApp.eventListener = function () {
+
+>>>>>>> e422381d0c2825ad88d7e8b4d9aa335d012fe501
     // Collect user input using a form to fill in search text
     $("form").on('submit', (e) => {
         e.preventDefault();
@@ -13,21 +20,38 @@ flixBoxApp.eventListener = function () {
         flixBoxApp.getMovieName(searchText);
         flixBoxApp.scroll(".section");
     })
+<<<<<<< HEAD
+=======
+
+>>>>>>> e422381d0c2825ad88d7e8b4d9aa335d012fe501
     // Triggers search button when enter key is pressed
     $(".submit").keyup(function (event) {
         if (event.keyCode === 13) {
             $(".submit").click();
         }
     });
+<<<<<<< HEAD
     // Clears search results when user hits backspace
     let input = $('input');
     input.on('keydown', function () {
         let key = event.keyCode || event.charCode;
+=======
+
+    // Clears search results when user hits backspace
+    let input = $('input');
+    input.on('keydown', function () {
+        var key = event.keyCode || event.charCode;
+
+>>>>>>> e422381d0c2825ad88d7e8b4d9aa335d012fe501
         if (key == 8 || key == 46) {
             location.reload();
             $('form').scrollTop(0);
         }
     });
+<<<<<<< HEAD
+=======
+
+>>>>>>> e422381d0c2825ad88d7e8b4d9aa335d012fe501
     // Refreshes page and search field and scrolls back to top
     $('.resetButton').on('click', function () {
         $('form').trigger("reset");
@@ -35,6 +59,7 @@ flixBoxApp.eventListener = function () {
         $(".resetButton").hide();
         $('form').scrollTop(0);
     });
+<<<<<<< HEAD
 }
 // AJAX call to get movie name and imdbID
 flixBoxApp.getMovieName = function (search) {
@@ -55,6 +80,32 @@ flixBoxApp.getMovieName = function (search) {
         alert("Could not find movie. Please try again")
     })
 }
+=======
+
+}
+
+
+// AJAX call to get movie name and imdbID
+flixBoxApp.getMovieName = function (search) {
+        $.ajax({
+        url: 'https://www.omdbapi.com/?',
+        method: 'GET',
+        dataType: 'json',
+        data: {
+            apikey: flixBoxApp.apikey,
+            s: `${search}`,
+        }
+    }).then((result) => {
+        console.log(result);
+        const Search = result.Search;
+        flixBoxApp.displayMovie(Search);
+    }).catch(error => {
+        alert("Could not find movie. Please enter a valid movie name.")
+        console.log(error);
+    })
+}
+
+>>>>>>> e422381d0c2825ad88d7e8b4d9aa335d012fe501
 // Append the movies on DOM 
 flixBoxApp.displayMovie = function(data){
     // look through each object in the array
@@ -64,8 +115,10 @@ flixBoxApp.displayMovie = function(data){
         const movieAll = 
     `
     <div class="movieAll">
+    <a onclick="selectedMovie('${movies.imdbID}')" href= "#">
         <img src="${movies.Poster}">
         <h3>${movies.Title}</h3>
+<<<<<<< HEAD
         <a onclick="flixBoxApp.selectedMovie('${movies.imdbID}')" href="#">Movie Details</a>
     </div>
     `
@@ -73,6 +126,17 @@ flixBoxApp.displayMovie = function(data){
     $(".resetButton").show();
     // console.log(movies);
     // console.log(movies.imdbID)
+=======
+        <h3>${movies.Year}</h3>
+        <button class="selectedMovie('${movies.imdbID}')">Movie Details</button>
+    </a>
+    </div>
+    `
+
+    $('.section').append(movieAll);
+    $(".resetButton").show();
+    // console.log(movies);
+>>>>>>> e422381d0c2825ad88d7e8b4d9aa335d012fe501
     })
 }
 
@@ -141,6 +205,11 @@ flixBoxApp.scroll = function (element) {
         }, 1000
     );
 };
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> e422381d0c2825ad88d7e8b4d9aa335d012fe501
 flixBoxApp.init = function () {
     // flixBoxApp.collectInfo();
     flixBoxApp.eventListener();
@@ -148,4 +217,8 @@ flixBoxApp.init = function () {
 //Document ready
 $(function () {
     flixBoxApp.init();
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> e422381d0c2825ad88d7e8b4d9aa335d012fe501
