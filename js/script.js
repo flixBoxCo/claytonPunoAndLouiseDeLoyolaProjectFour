@@ -13,8 +13,8 @@ flixBoxApp.eventListener = function () {
         flixBoxApp.getMovieName(searchText);
         // Refreshes search output
         searchText = [];
-        $('.section').empty();
-        flixBoxApp.scroll(".section");
+        $('section').empty();
+        flixBoxApp.scroll("section");
     })
     // Refreshes page and search field and scrolls back to top
     $('.resetButton').on('click', function () {
@@ -57,7 +57,7 @@ flixBoxApp.displayMovie = function(data){
         <a onclick="flixBoxApp.selectedMovie('${movies.imdbID}')" href="#">Movie Details</a>
     </div>
     `
-    $('.section').append(movieAll);
+    $('section').append(movieAll);
     $(".resetButton").show();
     // Replace img source if not available
     $('img').on("error", function () {
@@ -115,7 +115,7 @@ flixBoxApp.getMovie = function(){
             </div>
         </div>
         `
-        $('.section').append(output);
+        $('section').append(output);
         // Replace img source if not available
         $('img').on("error", function () {
             $(this).attr('src', './styles/assets/placeholder.png');
