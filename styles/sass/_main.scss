@@ -1,3 +1,4 @@
+// INDEX PAGE
 main {
     display: flex;
     justify-content: center;
@@ -92,3 +93,8 @@ button:hover {
     justify-content: center;
 }
 
+// MOVIE PAGE
+
+.movieImg img {
+    padding: 50px 0 0 10px;
+}

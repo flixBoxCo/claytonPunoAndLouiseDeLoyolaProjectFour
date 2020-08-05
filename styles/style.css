@@ -301,42 +301,6 @@ p {
   font-size: 32px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  max-width: 1200px;
-  width: 85%;
-  margin: 0 auto;
-}
-
-header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  text-align: center;
-}
-
-h1 {
-  font-family: 'Barlow', sans-serif;
-  font-size: 138px;
-  line-height: 126px;
-}
-
-h3, a {
-  font-family: 'Barlow', sans-serif;
-  font-size: 20px;
-  text-transform: uppercase;
-}
-
-a:link, a:visited {
-  text-decoration: none;
-}
-
-p {
-  font-family: 'Barlow', sans-serif;
-  font-size: 32px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
 }
 
 main {
@@ -357,6 +321,21 @@ form {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+}
+
+form .searchBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 10px;
 }
 
 input[type=text] {
@@ -450,6 +429,10 @@ button:hover {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.movieImg img {
+  padding: 50px 0 0 10px;
 }
 
 footer {

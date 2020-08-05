@@ -16,29 +16,21 @@ flixBoxApp.eventListener = function () {
         e.preventDefault();
         let searchText = $('input').val();
         flixBoxApp.getMovieName(searchText);
-        flixBoxApp.scroll(".section");
         // Refreshes results each search
         searchText = [];
         $('.section').empty();
+        flixBoxApp.scroll(".section");
     })
-
-    // Triggers search button when enter key is pressed
-    $(".submit").keyup(function (event) {
-        if (event.keyCode === 13) {
-            $(".submit").click();
-        }
-    });
-
 
     // Refreshes page and search field and scrolls back to top
     $('.resetButton').on('click', function (e) {
         e.preventDefault();
         $(".resetButton").hide();
-        flixBoxApp.scroll("h1");
+        flixBoxApp.scroll("header");
         setTimeout(() => {
             $('.section').empty();
             $('form')[0].reset();
-        }, 1200);
+        }, 1300);
     });
 
 }
@@ -78,7 +70,7 @@ flixBoxApp.displayMovie = function(data){
         <img src="${movies.Poster}">
         <h3>${movies.Title}</h3>
         <h3>${movies.Year}</h3>
-        <a onclick="flixBoxApp.selectedMovie('${movies.imdbID}')" href="#">Movie Details</a>
+        <button onclick="flixBoxApp.selectedMovie('${movies.imdbID}')">Movie Details</button>
     </a>
     </div>
     `
