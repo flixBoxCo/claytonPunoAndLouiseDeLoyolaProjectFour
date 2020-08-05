@@ -46,7 +46,7 @@ flixBoxApp.getMovieName = function (search) {
             s: `${search}`,
         }
     }).then((response) => {
-        // console.log(result);
+        console.log(response);
         const Search = response.Search;
         flixBoxApp.displayMovie(Search);
     }).catch(error => {
@@ -77,7 +77,10 @@ flixBoxApp.displayMovie = function(data){
 
     $('.section').append(movieAll);
     $(".resetButton").show();
-    // console.log(movies);
+    // Replace img source if not available
+    $('img').on("error", function () {
+    $(this).attr('src', './styles/assets/placeholder.png');
+    });
     })
 }
 
@@ -133,6 +136,10 @@ flixBoxApp.getMovie = function () {
         </div>
         `
         $('section').append(output);
+        // Replace img source if not available
+        $('img').on("error", function () {
+            $(this).attr('src', './styles/assets/placeholder.png');
+        });
     }).catch(error => {
         console.log("There is an error for imdbID");
     })
