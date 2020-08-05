@@ -16,26 +16,11 @@ flixBoxApp.eventListener = function () {
         e.preventDefault();
         let searchText = $('input').val();
         flixBoxApp.getMovieName(searchText);
+        // Refreshes search output
+        searchText = [];
+        $('.section').empty();
         flixBoxApp.scroll(".section");
     })
-
-    // Triggers search button when enter key is pressed
-    $(".submit").keyup(function (event) {
-        if (event.keyCode === 13) {
-            $(".submit").click();
-        }
-    });
-
-    // Clears search results when user hits backspace
-    let input = $('input');
-    input.on('keydown', function () {
-        var key = event.keyCode || event.charCode;
-
-        if (key == 8 || key == 46) {
-            location.reload();
-            $('form').scrollTop(0);
-        }
-    });
 
     // Refreshes page and search field and scrolls back to top
     $('.resetButton').on('click', function () {
