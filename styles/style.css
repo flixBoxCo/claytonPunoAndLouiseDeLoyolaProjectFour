@@ -331,8 +331,8 @@ header {
       -ms-flex-pack: center;
           justify-content: center;
   text-align: center;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3))), url("/assets/headerImg.jpeg");
-  background: linear-gradient(rgba(0, 0, 0, 0.3)), url("/assets/headerImg.jpeg");
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3))), url("/styles/assets/headerImg.jpeg");
+  background: linear-gradient(rgba(0, 0, 0, 0.3)), url("/styles/assets/headerImg.jpeg");
   background-position: center;
   background-size: cover;
   height: 60vh;
@@ -502,6 +502,11 @@ ul {
 footer {
   background-color: #8e5554;
   padding: 50px;
+}
+
+footer p {
+  font-size: 20px;
+  text-align: center;
 }
 
 @media (max-width: 640px) {
