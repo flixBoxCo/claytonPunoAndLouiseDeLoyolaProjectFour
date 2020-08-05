@@ -8,33 +8,12 @@ header {
     display: flex;
     justify-content: center;
     text-align: center;
-    background-color: $primaryBackgroundColor;
+    background: linear-gradient(rgba(0,0,0,0.3)), url("/assets/headerImg.jpeg");
+    background-position: center;
+    background-size: cover;
+    height: 60vh;
 }
 
-h1 {
-    font-family: 'Barlow', sans-serif;
-    font-size: 138px;
-    line-height: 126px;
-    color: $primaryColor;
-}
 
-h3, a {
-    font-family: 'Barlow', sans-serif;
-    font-size: 20px;
-    text-transform: uppercase;
-}
 
-h3 {
-    color: $primaryColor;
-}
 
-a:link, a:visited {
-    text-decoration: none;
-}
-
-p {
-    font-family: 'Barlow', sans-serif;
-    font-size: 32px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
