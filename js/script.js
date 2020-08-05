@@ -11,23 +11,12 @@ flixBoxApp.eventListener = function () {
         e.preventDefault();
         let searchText = $('input').val();
         flixBoxApp.getMovieName(searchText);
+        // Refreshes search output
+        searchText = [];
+        $('.section').empty();
         flixBoxApp.scroll(".section");
     })
-    // Triggers search button when enter key is pressed
-    $(".submit").keyup(function (event) {
-        if (event.keyCode === 13) {
-            $(".submit").click();
-        }
-    });
-    // Clears search results when user hits backspace
-    let input = $('input');
-    input.on('keydown', function () {
-        let key = event.keyCode || event.charCode;
-        if (key == 8 || key == 46) {
-            location.reload();
-            $('form').scrollTop(0);
-        }
-    });
+
     // Refreshes page and search field and scrolls back to top
     $('.resetButton').on('click', function () {
         $('form').trigger("reset");
@@ -47,10 +36,9 @@ flixBoxApp.getMovieName = function (search) {
         s: `${search}`
         }
     }).then((response) => {
-        // console.log(result);
-        const search = response.Search;
-        flixBoxApp.displayMovie(search);
-        // const id = result.Search.imdbID;
+        console.log(response);
+        const Search = response.Search;
+        flixBoxApp.displayMovie(Search);
     }).catch(error => {
         alert("Could not find movie. Please try again")
     })
@@ -72,8 +60,10 @@ flixBoxApp.displayMovie = function(data){
     `
     $('section').append(movieAll);
     $(".resetButton").show();
-    // console.log(movies);
-    // console.log(movies.imdbID)
+    // Replace img source if not available
+    $('img').on("error", function () {
+    $(this).attr('src', './styles/assets/placeholder.png');
+    });
     })
 }
 
@@ -129,6 +119,10 @@ flixBoxApp.getMovie = function(){
         </div>
         `
         $('section').append(output);
+        // Replace img source if not available
+        $('img').on("error", function () {
+            $(this).attr('src', './styles/assets/placeholder.png');
+        });
     }).catch(error => {
         console.log("There is an error for imdbID");
     })
