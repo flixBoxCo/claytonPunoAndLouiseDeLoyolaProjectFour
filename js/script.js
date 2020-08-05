@@ -16,7 +16,6 @@ flixBoxApp.eventListener = function () {
         $('.section').empty();
         flixBoxApp.scroll(".section");
     })
-
     // Refreshes page and search field and scrolls back to top
     $('.resetButton').on('click', function () {
         $('form').trigger("reset");
@@ -66,14 +65,12 @@ flixBoxApp.displayMovie = function(data){
     });
     })
 }
-
 // function for <a onclick> to save session storage to movie.html
 flixBoxApp.selectedMovie = function(id){
     sessionStorage.setItem('movieId', id);
     window.location = 'movie.html';
     return false;
 }
-
 // function for movie.html
 // get imdbID for movie and display on DOM
 flixBoxApp.getMovie = function(){
@@ -127,7 +124,6 @@ flixBoxApp.getMovie = function(){
         console.log("There is an error for imdbID");
     })
 }
-
 //slow scroll 
 flixBoxApp.scroll = function (element) {
     $('html').animate(
