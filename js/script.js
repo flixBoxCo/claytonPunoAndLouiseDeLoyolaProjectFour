@@ -16,37 +16,24 @@ flixBoxApp.eventListener = function () {
         e.preventDefault();
         let searchText = $('input').val();
         flixBoxApp.getMovieName(searchText);
+        // Refreshes results each search
+        searchText = [];
+        $('.section').empty();
         flixBoxApp.scroll(".section");
     })
 
-    // Triggers search button when enter key is pressed
-    $(".submit").keyup(function (event) {
-        if (event.keyCode === 13) {
-            $(".submit").click();
-        }
-    });
-
-    // Clears search results when user hits backspace
-    let input = $('input');
-    input.on('keydown', function () {
-        var key = event.keyCode || event.charCode;
-
-        if (key == 8 || key == 46) {
-            location.reload();
-            $('form').scrollTop(0);
-        }
-    });
-
     // Refreshes page and search field and scrolls back to top
-    $('.resetButton').on('click', function () {
-        $('form').trigger("reset");
-        location.reload();
+    $('.resetButton').on('click', function (e) {
+        e.preventDefault();
         $(".resetButton").hide();
-        $('form').scrollTop(0);
+        flixBoxApp.scroll("header");
+        setTimeout(() => {
+            $('.section').empty();
+            $('form')[0].reset();
+        }, 1300);
     });
 
 }
-
 
 // AJAX call to get movie name and imdbID
 flixBoxApp.getMovieName = function (search) {
@@ -58,32 +45,32 @@ flixBoxApp.getMovieName = function (search) {
             apikey: flixBoxApp.apikey,
             s: `${search}`,
         }
-    }).then((result) => {
-        console.log(result);
-        const Search = result.Search;
+    }).then((response) => {
+        // console.log(result);
+        const Search = response.Search;
         flixBoxApp.displayMovie(Search);
     }).catch(error => {
-        alert("Could not find movie. Please enter a valid movie name.")
-        console.log(error);
+        alert("Could not find movie. Please try again")
+        // console.log(error);
     })
 }
 
+
 // Append the movies on DOM 
 flixBoxApp.displayMovie = function(data){
-    
+        
     // look through each object in the array
     // get the title, poster and imdbID
-    // display these on the page in html elements
-    // forEach 
+    // display these on the page in html elements using forEach
     data.forEach(function(movies) {
         const movieAll = 
     `
     <div class="movieAll">
-    <a onclick="selectedMovie('${movies.imdbID}')" href= "#">
+    <a onclick="flixBoxApp.selectedMovie('${movies.imdbID}')" href= "#">
         <img src="${movies.Poster}">
         <h3>${movies.Title}</h3>
         <h3>${movies.Year}</h3>
-        <button class="selectedMovie('${movies.imdbID}')">Movie Details</button>
+        <button onclick="flixBoxApp.selectedMovie('${movies.imdbID}')">Movie Details</button>
     </a>
     </div>
     `
@@ -94,7 +81,8 @@ flixBoxApp.displayMovie = function(data){
     })
 }
 
-function selectedMovie (id) {
+// function for <a onclick> to save session storage to movie.html
+flixBoxApp.selectedMovie = function (id) {
     sessionStorage.setItem('movieId', id);
     window.location = 'movie.html';
     return false;
@@ -102,7 +90,7 @@ function selectedMovie (id) {
 
 // function for movie.html
 // get imdbID for movie and display on DOM
-flixBoxApp.getMovie = function(){
+flixBoxApp.getMovie = function () {
     //use session storage to get movie id
     let movieId = sessionStorage.getItem('movieId');
     $.ajax({
@@ -117,7 +105,7 @@ flixBoxApp.getMovie = function(){
         // console.log(response);
         let movie = response;
         // display movie on DOM
-        let output =`
+        let output = `
         <div class="movie">
             <div class="movieImg">
                 <img src="${movie.Poster}">
@@ -150,6 +138,8 @@ flixBoxApp.getMovie = function(){
     })
 }
 
+
+
 //slow scroll 
 flixBoxApp.scroll = function (element) {
     $('html').animate(
@@ -161,7 +151,6 @@ flixBoxApp.scroll = function (element) {
 
 
 flixBoxApp.init = function () {
-    // flixBoxApp.collectInfo();
     flixBoxApp.eventListener();
 }
 
