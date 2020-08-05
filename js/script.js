@@ -17,6 +17,9 @@ flixBoxApp.eventListener = function () {
         let searchText = $('input').val();
         flixBoxApp.getMovieName(searchText);
         flixBoxApp.scroll(".section");
+        // Refreshes results each search
+        searchText = [];
+        $('.section').empty();
     })
 
     // Triggers search button when enter key is pressed
@@ -26,27 +29,19 @@ flixBoxApp.eventListener = function () {
         }
     });
 
-    // Clears search results when user hits backspace
-    let input = $('input');
-    input.on('keydown', function () {
-        let key = event.keyCode || event.charCode;
-
-        if (key == 8 || key == 46) {
-            location.reload();
-            $('form').scrollTop(0);
-        }
-    });
 
     // Refreshes page and search field and scrolls back to top
-    $('.resetButton').on('click', function () {
-        $('form').trigger("reset");
-        location.reload();
+    $('.resetButton').on('click', function (e) {
+        e.preventDefault();
         $(".resetButton").hide();
-        $('form').scrollTop(0);
+        flixBoxApp.scroll("h1");
+        setTimeout(() => {
+            $('.section').empty();
+            $('form')[0].reset();
+        }, 1200);
     });
 
 }
-
 
 // AJAX call to get movie name and imdbID
 flixBoxApp.getMovieName = function (search) {
@@ -68,9 +63,10 @@ flixBoxApp.getMovieName = function (search) {
     })
 }
 
+
 // Append the movies on DOM 
 flixBoxApp.displayMovie = function(data){
-    
+        
     // look through each object in the array
     // get the title, poster and imdbID
     // display these on the page in html elements using forEach
@@ -163,7 +159,6 @@ flixBoxApp.scroll = function (element) {
 
 
 flixBoxApp.init = function () {
-    // flixBoxApp.collectInfo();
     flixBoxApp.eventListener();
 }
 
