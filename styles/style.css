@@ -297,6 +297,10 @@ p {
   margin: 0 auto;
 }
 
+footer p {
+  text-align: center;
+}
+
 .period {
   color: #82cfd4;
 }
