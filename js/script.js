@@ -13,8 +13,8 @@ flixBoxApp.eventListener = function () {
         flixBoxApp.getMovieName(searchText);
         // Refreshes search output
         searchText = [];
-        $('.section').empty();
-        flixBoxApp.scroll(".section");
+        $('section').empty();
+        flixBoxApp.scroll("section");
     })
 
     // Refreshes page and search field and scrolls back to top
@@ -52,7 +52,7 @@ flixBoxApp.displayMovie = function(data){
         const movieAll = 
     `
     <div class="movieAll">
-    <a onclick="selectedMovie('${movies.imdbID}')" href= "#">
+    <a onclick="flixBoxApp.selectedMovie('${movies.imdbID}')" href= "#">
         <img src="${movies.Poster}">
         <h3>${movies.Title}</h3>
         <a onclick="flixBoxApp.selectedMovie('${movies.imdbID}')" href="#">Movie Details</a>
@@ -136,6 +136,7 @@ flixBoxApp.scroll = function (element) {
         }, 1000
     );
 };
+
 flixBoxApp.init = function () {
     // flixBoxApp.collectInfo();
     flixBoxApp.eventListener();
